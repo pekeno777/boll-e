@@ -67,64 +67,7 @@ const ServiceCatalog = () => {
       icon: Headphones,
     },
     {
-      title: "Data Processing", 
-      brief: "Intelligent data entry, validation, and analysis with machine learning algorithms ensuring 99.9% accuracy.",
-      description: "Our comprehensive back-office automation suite eliminates manual processes through advanced RPA, intelligent document processing, and workflow orchestration. We handle everything from data entry to complex approval workflows, ensuring accuracy and compliance.",
-      features: [
-        "Robotic Process Automation (RPA)",
-        "Intelligent document processing",
-        "Workflow orchestration and optimization", 
-        "Compliance monitoring and reporting",
-        "Exception handling and escalation",
-      ],
-      kpis: [
-        { label: "Process Accuracy", target: "99.5%", current: "97.2%" },
-        { label: "Processing Speed", target: "10x faster", current: "8x faster" },
-        { label: "Cost Reduction", target: "45%", current: "38%" },
-      ],
-      color: "cyan",
-      icon: Database,
-    },
-    {
-      title: "Finance & Accounting",
-      brief: "Automated bookkeeping, invoice processing, and financial reporting with AI-driven fraud detection.",
-      description: "Transform your data into actionable insights with our comprehensive analytics platform. We provide real-time dashboards, predictive analytics, and custom reporting solutions that drive informed decision-making and strategic planning.",
-      features: [
-        "Real-time business intelligence dashboards",
-        "Predictive analytics and forecasting",
-        "Custom reporting and visualization",
-        "Data quality management", 
-        "Advanced statistical modeling",
-      ],
-      kpis: [
-        { label: "Data Accuracy", target: "99.8%", current: "98.5%" },
-        { label: "Report Generation", target: "<5min", current: "7min" },
-        { label: "Insight Delivery", target: "Real-time", current: "Near real-time" },
-      ],
-      color: "purple",
-      icon: BarChart3,
-    },
-    {
-      title: "Human Resources",
-      brief: "Streamlined recruitment, onboarding, and employee management with AI-powered candidate screening.",
-      description: "Intelligent HR solutions that automate recruitment processes, employee onboarding, and performance management through advanced AI algorithms and predictive analytics.",
-      features: [
-        "AI-powered candidate screening",
-        "Automated onboarding workflows",
-        "Performance analytics and insights",
-        "Employee engagement monitoring",
-        "Compliance and policy management",
-      ],
-      kpis: [
-        { label: "Hiring Efficiency", target: "70%", current: "65%" },
-        { label: "Employee Satisfaction", target: "90%", current: "87%" },
-        { label: "Time to Hire", target: "15 days", current: "18 days" },
-      ],
-      color: "emerald",
-      icon: Users,
-    },
-    {
-      title: "IT Support",
+      title: "Marketing",
       brief: "Intelligent helpdesk solutions with automated ticket routing and predictive maintenance.",
       description: "Advanced IT support automation that provides 24/7 technical assistance, proactive system monitoring, and intelligent problem resolution through machine learning algorithms.",
       features: [
@@ -143,7 +86,7 @@ const ServiceCatalog = () => {
       icon: Bot,
     },
     {
-      title: "Sales & Marketing",
+      title: "Sales",
       brief: "AI-driven lead generation, customer segmentation, and personalized marketing campaigns.",
       description: "Comprehensive sales and marketing automation that leverages AI to identify prospects, personalize campaigns, and optimize conversion rates through advanced analytics and machine learning.",
       features: [
@@ -164,7 +107,7 @@ const ServiceCatalog = () => {
   ]
 
   return (
-    <section className="flex flex-col items-center px-4 py-20 relative overflow-hidden">
+    <section className="flex flex-col items-center px-4 py-20 relative -z-10 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"></div>
@@ -282,6 +225,16 @@ const ServiceCatalog = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+            </div>
+
+            {/* Flowchart Section */}
+            <div className="mt-16 text-center">
+              <h4 className="text-2xl font-bold font-sans text-brand-text mb-8">Service Workflow</h4>
+              <div className="bg-gray-100/50 backdrop-blur-sm p-8 rounded-lg border border-gray-200" style={{ minHeight: '300px' }}>
+                <p className="text-gray-500">
+                  [Placeholder for Flowchart Diagram - You can integrate an SVG, an image, or a dedicated flowchart library here.]
+                </p>
               </div>
             </div>
 
