@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Bot, Database, BarChart3, Users, Headphones, TrendingUp } from 'lucide-react';
+import { ArrowRight, Bot, Headphones, TrendingUp } from 'lucide-react';
 
 const getColorClasses = (color: string) => {
   const colors = {
@@ -68,46 +68,46 @@ const ServiceCatalog = () => {
     },
     {
       title: "Marketing",
-      brief: "Intelligent helpdesk solutions with automated ticket routing and predictive maintenance.",
-      description: "Advanced IT support automation that provides 24/7 technical assistance, proactive system monitoring, and intelligent problem resolution through machine learning algorithms.",
-      features: [
-        "Automated ticket routing and prioritization",
-        "Predictive maintenance alerts",
-        "Self-service knowledge base",
-        "Real-time system monitoring",
-        "Intelligent problem diagnosis",
-      ],
-      kpis: [
-        { label: "Resolution Time", target: "2 hours", current: "3 hours" },
-        { label: "First Call Resolution", target: "80%", current: "75%" },
-        { label: "System Uptime", target: "99.9%", current: "99.7%" },
-      ],
-      color: "indigo",
-      icon: Bot,
-    },
-    {
-      title: "Sales",
-      brief: "AI-driven lead generation, customer segmentation, and personalized marketing campaigns.",
-      description: "Comprehensive sales and marketing automation that leverages AI to identify prospects, personalize campaigns, and optimize conversion rates through advanced analytics and machine learning.",
+      brief: "AI-driven marketing automation with personalized campaigns and customer segmentation.",
+      description: "Comprehensive marketing automation that leverages AI to identify prospects, personalize campaigns, and optimize conversion rates through advanced analytics and machine learning.",
       features: [
         "AI-powered lead scoring and qualification",
         "Personalized marketing campaigns",
         "Customer journey optimization",
-        "Sales forecasting and analytics",
-        "Automated follow-up sequences",
+        "Marketing analytics and insights",
+        "Automated email sequences",
       ],
       kpis: [
         { label: "Lead Conversion", target: "25%", current: "22%" },
         { label: "Campaign ROI", target: "400%", current: "350%" },
+        { label: "Engagement Rate", target: "35%", current: "32%" },
+      ],
+      color: "cyan",
+      icon: TrendingUp,
+    },
+    {
+      title: "Sales",
+      brief: "Intelligent sales automation with lead scoring and pipeline management.",
+      description: "Advanced sales automation that uses AI to qualify leads, predict deal outcomes, and optimize sales processes through intelligent analytics and automated workflows.",
+      features: [
+        "Intelligent lead scoring and qualification",
+        "Sales pipeline optimization",
+        "Deal outcome prediction",
+        "Sales forecasting and analytics",
+        "Automated sales workflows",
+      ],
+      kpis: [
+        { label: "Deal Closure Rate", target: "35%", current: "32%" },
+        { label: "Sales Cycle", target: "25 days", current: "28 days" },
         { label: "Sales Cycle", target: "30 days", current: "35 days" },
       ],
-      color: "orange",
-      icon: TrendingUp,
+      color: "purple",
+      icon: Bot,
     },
   ]
 
   return (
-    <section className="flex flex-col items-center px-4 py-20 relative -z-10 overflow-hidden">
+    <section className="flex flex-col items-center px-4 py-20 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"></div>
@@ -115,11 +115,11 @@ const ServiceCatalog = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-violet-400/10 to-pink-600/10 rounded-full blur-3xl"></div>
       </div>
 
-      <h1 className="text-5xl md:text-7xl font-serif leading-tight mb-7" data-aos="fade-down">Our Services</h1>
+      <h1 className="text-5xl md:text-7xl font-serif leading-tight mb-7">Our Services</h1>
       <div className="w-full flex flex-col items-center space-y-10 max-w-6xl">
         <figure
           className="w-full h-auto flex flex-col md:flex-row items-start p-8 justify-center"
-          data-aos="fade-up">
+          >
           <p className="md:w-2/3 text-center font-sans text-lg py-3">We provide comprehensive AI-powered BPO solutions that transform your business operations. Our intelligent automation reduces costs while enhancing efficiency and scalability across all your processes.</p>
         </figure>
         
@@ -231,7 +231,7 @@ const ServiceCatalog = () => {
             {/* Flowchart Section */}
             <div className="mt-16 text-center">
               <h4 className="text-2xl font-bold font-sans text-brand-text mb-8">Service Workflow</h4>
-              <div className="bg-gray-100/50 backdrop-blur-sm p-8 rounded-lg border border-gray-200" style={{ minHeight: '300px' }}>
+              <div className="bg-gray-100/50 backdrop-blur-sm p-8 rounded-lg border border-gray-200 min-h-[300px]">
                 <p className="text-gray-500">
                   [Placeholder for Flowchart Diagram - You can integrate an SVG, an image, or a dedicated flowchart library here.]
                 </p>
