@@ -23,23 +23,27 @@ This section details the design, style, and features implemented in the applicat
 *   **Footer Section (`src/sections/Footer.astro`):** Contains copyright information, quick links, and social media icons. This section retains its distinct `bg-[#252525]` background.
 
 ### Plan and Steps for Current Change
-**Goal:** Implement a unified background across all sections, eliminating visible seams, and add a dedicated flowchart space in the extended service cards.
+**Goal:** Distribute "recurso" images to specific section backgrounds without blur, making them larger and ensuring they do not obstruct any content.
 
 **Steps Taken:**
 
-1.  **Unified Background Implementation:**
-    *   **Verified `src/styles/global.css`:** Confirmed no conflicting global background styles.
-    *   **Leveraged `src/layouts/Layout.astro`:** Maintained the existing `body` background with radial gradients and `background-attachment: fixed;` to serve as the continuous page background.
-    *   **Modified Section Backgrounds:**
-        *   **`src/sections/Hero.astro`:** Changed the background of the comparison card from `bg-white/70` to a consistent `bg-white/70 backdrop-blur-lg` for better translucency.
-        *   **`src/sections/About.astro`:** Applied `bg-white/70 backdrop-blur-lg` to the content figures to ensure translucency.
-        *   **`src/sections/Indicators.astro`:** Removed `bg-white/50` from the `<section>` and updated the figures to use `bg-white/70 backdrop-blur-lg`.
-        *   **`src/sections/History.astro`:** Adjusted the timeline circles from `border-4 border-white` to `border-4 border-gray-100/50` for translucency.
-        *   **`src/sections/Science.astro`:** Updated technology stack figures to use `bg-white/70 backdrop-blur-lg`.
-        *   **`src/sections/Team.astro`:** Applied `bg-white/70 backdrop-blur-lg` to team member cards and the team statistics block.
-        *   **`src/sections/Portfolio.astro`:** Modified case study figures and the portfolio stats block to use `bg-white/70 backdrop-blur-lg`.
-        *   **`src/sections/Contact.astro`:** Updated the contact form and contact information figures to use `bg-white/70 backdrop-blur-lg`.
-        *   **`src/sections/Footer.astro`:** Retained its distinct `bg-[#252525]` background as it's intended to be a visually separate element.
-
-2.  **Flowchart Space in Services Component:**
-    *   **Modified `src/components/ServicesReact.tsx`:** Added a new `div` element within the extended service card, after the "Key Features" and "Performance Targets" sections, with the title "Service Workflow" and a placeholder text for the flowchart. This new area uses `bg-gray-100/50 backdrop-blur-sm` for its background, providing a subtle visual separation while maintaining the translucent theme.
+1.  **Reverted `src/layouts/Layout.astro`:** Removed the `<div id="background-recursos"></div>`.
+2.  **Cleaned `src/styles/global.css`:** Removed the `#background-recursos` CSS rule.
+3.  **Updated `src/sections/Hero.astro`:**
+    *   Added `style` attribute to the `<section>` tag.
+    *   Applied `background-image: url('/Recurso1.png'), url('/Recurso2.png');`.
+    *   Set `background-repeat: no-repeat;`.
+    *   **Adjusted `background-position`:** Changed from `10% 20%, 90% 80%;` to `5% 10%, 95% 90%;` to avoid the title.
+    *   **Increased `background-size`:** Changed from `250px 250px, 350px 350px;` to `350px 350px, 450px 450px;`.
+4.  **Updated `src/sections/About.astro`:**
+    *   Added `style` attribute to the `<section>` tag.
+    *   Applied `background-image: url('/Recurso3.png'), url('/Recurso4.png');`.
+    *   Set `background-repeat: no-repeat;`.
+    *   **Adjusted `background-position`:** Changed from `5% 5%, 85% 95%;` to `0% 10%, 100% 80%;`.
+    *   **Increased `background-size`:** Changed from `280px 280px, 220px 220px;` to `380px 380px, 320px 320px;`.
+5.  **Updated `src/sections/Contact.astro`:**
+    *   Added `style` attribute to the `<section>` tag.
+    *   Applied `background-image: url('/Recurso5.png'), url('/recurso 6.png');`.
+    *   Set `background-repeat: no-repeat;`.
+    *   **Adjusted `background-position`:** Changed from `20% 70%, 70% 30%;` to `5% 80%, 85% 20%;`.
+    *   **Increased `background-size`:** Changed from `100px 100px, 220px 220px;` to `300px 300px, 450px 450px;`.

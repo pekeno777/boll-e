@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Bot, Headphones, TrendingUp, DollarSign, Target, } from 'lucide-react';
+import { ArrowRight, Bot, Headphones, TrendingUp, DollarSign, Target, Plus, Minus } from 'lucide-react';
 
 const getColorClasses = (color: string) => {
   const colors = {
@@ -45,6 +45,29 @@ const getColorClasses = (color: string) => {
 
 const ServiceCatalog = () => {
   const [activeService, setActiveService] = useState(0)
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState('');
+  const [zoomLevel, setZoomLevel] = useState(1);
+
+  const openModal = (imageSrc: string) => {
+    setModalImage(imageSrc);
+    setModalOpen(true);
+    setZoomLevel(1); // Reset zoom level when opening a new modal
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalImage('');
+    setZoomLevel(1); // Reset zoom level when closing modal
+  };
+
+  const handleZoomIn = () => {
+    setZoomLevel((prevZoom) => Math.min(prevZoom + 0.2, 3)); // Max zoom 3x
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel((prevZoom) => Math.min(Math.max(prevZoom - 0.2, 1), 3)); // Min zoom 1x
+  };
 
   const services = [
     {
@@ -70,6 +93,8 @@ const ServiceCatalog = () => {
       ],
       color: "violet",
       icon: Headphones,
+      flowchart: "/CostumerService.svg",
+      protocolLink: "#customer-service-protocols", // Placeholder link
     },
     {
       title: "Marketing",
@@ -92,6 +117,8 @@ const ServiceCatalog = () => {
       ],
       color: "cyan",
       icon: TrendingUp,
+      flowchart: "/Marketing.drawio.svg",
+      protocolLink: "#marketing-protocols", // Placeholder link
     },
     {
       title: "Sales",
@@ -113,6 +140,8 @@ const ServiceCatalog = () => {
       ],
       color: "purple",
       icon: DollarSign,
+      flowchart: "/Sales.drawio.svg",
+      protocolLink: "#sales-protocols", // Placeholder link
     },
   ]
 
@@ -174,7 +203,7 @@ const ServiceCatalog = () => {
                     <div className="pt-4">
                       <div className="w-full h-px bg-gray-200">
                         <div
-                          className={`h-px bg-gradient-to-r ${getColorClasses(service.color).gradient} transition-all duration-500 ${
+                          className={`h-px bg-gradient-to-r ${getColorClasses(service.color).gradient} rounded-full transition-all duration-500 ${
                             activeService === index ? "w-full" : "w-0"
                           }`}
                         ></div>
@@ -227,7 +256,7 @@ const ServiceCatalog = () => {
                     return (
                       <div key={index} className="space-y-3">
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-600 font-sans">{kpi.label}</span>
+                          <span className="text-gray-600 text-lg font-sans">{kpi.label}</span>
                           <span
                             className={`text-2xl font-bold ${getColorClasses(services[activeService].color).text}`}
                           >
@@ -250,22 +279,76 @@ const ServiceCatalog = () => {
             {/* Flowchart Section */}
             <div className="mt-16 text-center">
               <h4 className="text-2xl font-bold font-sans text-brand-text mb-8">Service Workflow</h4>
-              <div className="bg-gray-100/50 backdrop-blur-sm p-8 rounded-lg border border-gray-200 min-h-[300px]">
-                <p className="text-gray-500">
-                  [Placeholder for Flowchart Diagram - You can integrate an SVG, an image, or a dedicated flowchart library here.]
-                </p>
+              <div className="bg-gray-100/50 backdrop-blur-sm p-8 rounded-lg border border-gray-200 min-h-[300px] flex items-center justify-center overflow-auto">
+                {services[activeService].flowchart ? (
+                  <img 
+                    src={services[activeService].flowchart} 
+                    alt={`${services[activeService].title} Flowchart`} 
+                    className="max-w-full h-auto cursor-zoom-in"
+                    onClick={() => openModal(services[activeService].flowchart)}
+                  />
+                ) : (
+                  <p className="text-gray-500">No flowchart available for this service.</p>
+                )}
+              </div>
+              <div className="text-center mt-8">
+                {services[activeService].protocolLink && (
+                  <a
+                    href={services[activeService].protocolLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-brand-text text-brand-text font-bold py-3 px-8 rounded-full hover:bg-[#252525] hover:text-white transition-all duration-300 inline-flex items-center mx-auto"
+                  >
+                    Protocols
+                    <ArrowRight className="ml-3 h-5 w-5" />
+                  </a>
+                )}
               </div>
             </div>
 
-            <div className="text-center mt-16">
-              <button className="border border-brand-text text-brand-text font-bold py-3 px-8 rounded-full hover:bg-brand-text hover:text-white transition-all duration-300 flex items-center mx-auto">
-                Learn More
-                <ArrowRight className="ml-3 h-5 w-5" />
-              </button>
-            </div>
+            
           </div>
         </div>
       </div>
+
+      {modalOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+          onClick={closeModal}
+        >
+          <div 
+            className="relative bg-white p-4 rounded-lg max-w-3xl max-h-[90vh] overflow-auto"
+            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking on the image
+          >
+            <button 
+              className="absolute top-2 right-2 text-gray-800 text-3xl font-bold"
+              onClick={closeModal}
+            >
+              &times;
+            </button>
+            <div className="absolute top-2 left-2 flex space-x-2 z-10">
+              <button 
+                onClick={handleZoomIn}
+                className="bg-gray-700 text-white p-2 rounded-full shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              >
+                <Plus className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={handleZoomOut}
+                className="bg-gray-700 text-white p-2 rounded-full shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              >
+                <Minus className="w-5 h-5" />
+              </button>
+            </div>
+            <img 
+              src={modalImage} 
+              alt="Enlarged Flowchart" 
+              className="w-full h-auto transform origin-top-left transition-transform duration-100 ease-out"
+              style={{ transform: `scale(${zoomLevel})`}}
+            />
+          </div>
+        </div>
+      )}
     </section>
   )
 }
