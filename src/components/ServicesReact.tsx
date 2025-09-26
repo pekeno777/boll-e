@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Bot, Headphones, TrendingUp } from 'lucide-react';
+import { ArrowRight, Bot, Headphones, TrendingUp, DollarSign, Target, } from 'lucide-react';
 
 const getColorClasses = (color: string) => {
   const colors = {
@@ -59,9 +59,14 @@ const ServiceCatalog = () => {
         "Predictive customer behavior modeling",
       ],
       kpis: [
-        { label: "Customer Satisfaction", target: "95%", current: "92%" },
-        { label: "First Contact Resolution", target: "85%", current: "78%" },
-        { label: "Average Response Time", target: "<15s", current: "18s" },
+        { label: "Service Level", target: "95%", current: "92%" },
+        { label: "First Call Resolution", target: "85%", current: "85%" },
+        { label: "Average Handle Time", target: "<120s", current: "18s" },
+        { label: "Response Time", target: "<5s", current: "<1s"},
+        { label: "Resolution Time", target: "<24h", current: "18s"},
+        { label: "Customer Satisfaction", target: "98%", current: "97%"},
+        { label: "Occupancy Rate", target: "80%", current: "80%"},
+        { label: "Accuracy", target: "95%", current: "92%" },
       ],
       color: "violet",
       icon: Headphones,
@@ -78,9 +83,12 @@ const ServiceCatalog = () => {
         "Automated email sequences",
       ],
       kpis: [
-        { label: "Lead Conversion", target: "25%", current: "22%" },
+        { label: "Lead Conversion", target: "85%", current: "82%" },
         { label: "Campaign ROI", target: "400%", current: "350%" },
-        { label: "Engagement Rate", target: "35%", current: "32%" },
+        { label: "Engagement Rate", target: "75%", current: "72%" },
+        { label: "Website Conversion Rate", target: "5%", current: "<1s"},
+        { label: "Customer Lifetime Value (CLTV)", target: "+$500", current: "18s"},
+        { label: "Net Promoter Score", target: "95%", current: "92%"}
       ],
       color: "cyan",
       icon: TrendingUp,
@@ -97,12 +105,14 @@ const ServiceCatalog = () => {
         "Automated sales workflows",
       ],
       kpis: [
-        { label: "Deal Closure Rate", target: "35%", current: "32%" },
+        { label: "Deal Closure Rate", target: "70%", current: "70%" },
         { label: "Sales Cycle", target: "25 days", current: "28 days" },
-        { label: "Sales Cycle", target: "30 days", current: "35 days" },
+        { label: "Average Deal Size", target: "+$10,000", current: "35 days" },
+        { label: "Conversion Rate", target: "75%", current: "75%" },
+        { label: "Sales Qualified Leads", target: "+80%", current: "80%" },
       ],
       color: "purple",
-      icon: Bot,
+      icon: DollarSign,
     },
   ]
 
@@ -206,24 +216,33 @@ const ServiceCatalog = () => {
               <div className="space-y-6">
                 <h4 className="text-2xl font-bold font-sans text-brand-text mb-8">Performance Targets</h4>
                 <div className="space-y-6">
-                  {services[activeService].kpis.map((kpi, index) => (
-                    <div key={index} className="space-y-3">
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-600 font-sans">{kpi.label}</span>
-                        <span
-                          className={`text-2xl font-bold ${getColorClasses(services[activeService].color).text}`}
-                        >
-                          {kpi.target}
-                        </span>
+                  {services[activeService].kpis.map((kpi, index) => {
+
+                    let progressBarWidth = '100%';
+                    if (kpi.current.endsWith('%')) {
+                      const percentage = parseFloat(kpi.current);
+                      progressBarWidth = `${Math.min(percentage, 100)}%`;
+                    }
+
+                    return (
+                      <div key={index} className="space-y-3">
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-600 font-sans">{kpi.label}</span>
+                          <span
+                            className={`text-2xl font-bold ${getColorClasses(services[activeService].color).text}`}
+                          >
+                            {kpi.target}
+                          </span>
+                        </div>
+                        <div className="w-full h-2 bg-gray-200 rounded-full">
+                          <div
+                            className={`h-2 bg-gradient-to-r ${getColorClasses(services[activeService].color).gradient} rounded-full transition-all duration-1000`}
+                            style={{ width: progressBarWidth }}
+                          ></div>
+                        </div>
                       </div>
-                      <div className="w-full h-2 bg-gray-200 rounded-full">
-                        <div
-                          className={`h-2 bg-gradient-to-r ${getColorClasses(services[activeService].color).gradient} rounded-full transition-all duration-1000`}
-                          style={{ width: "85%" }}
-                        ></div>
-                      </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               </div>
             </div>
