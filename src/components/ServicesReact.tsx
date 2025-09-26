@@ -154,7 +154,7 @@ const ServiceCatalog = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-violet-400/10 to-pink-600/10 rounded-full blur-3xl"></div>
       </div>
 
-      <h1 className="text-5xl md:text-7xl font-serif leading-tight mb-7">Our Services</h1>
+      <h1 className="text-5xl md:text-7xl font-serif leading-tight mb-7">Our <span className="bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent font-bold">Services</span></h1>
       <div className="w-full flex flex-col items-center space-y-10 max-w-6xl">
         <figure
           className="w-full h-auto flex flex-col md:flex-row items-start p-8 justify-center"
